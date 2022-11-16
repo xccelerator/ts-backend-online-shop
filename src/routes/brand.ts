@@ -1,18 +1,31 @@
 import { NextFunction, Request, Response } from "express";
-import { RoutesController } from "./routesController";
+import { AuthMiddleware } from "../middleware/authMiddleware";
+import { RoutesController } from "../controllers/routesController";
 
 export class BrandController extends RoutesController{
     constructor(){
         super();
         this.bindRoutes([
-            {path : '/add', method: 'post', func : this.add},
-            {path : '/delete', method: 'post', func : this.delete},
-            {path : '/update', method: 'post', func: this.update},
+            {   path : '/add', 
+                method: 'post', 
+                func : this.add, 
+                middlewares : [new AuthMiddleware(['admin'])]
+            },
+            {   path : '/delete',
+                method: 'post', 
+                func : this.delete,
+                middlewares : [new AuthMiddleware(['admin'])]
+            },
+            {   path : '/update', 
+                method: 'post', 
+                func: this.update,
+                middlewares : [new AuthMiddleware(['admin'])]
+            },
         ])
     }
 
     add(req: Request,res : Response, next : NextFunction){
-        res.send('add')
+        
     }
 
     delete(req: Request,res : Response, next : NextFunction){

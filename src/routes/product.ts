@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { RoutesController } from "./routesController";
+import { RoutesController } from "../controllers/routesController";
 
 export class ProductController extends RoutesController{
     constructor(){

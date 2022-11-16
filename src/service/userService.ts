@@ -1,5 +1,5 @@
 import { User } from "../database/entities/user";
-import { hash, compareSync } from 'bcrypt'
+import { hash, compareSync } from "bcrypt"
 import { AppDataSource } from "../database/dbConnection";
 
 export class UserService {
@@ -33,25 +33,21 @@ export class UserService {
         if(!user.length){
             throw new Error('Invalid account!')
         }
-
         try {
-            console.log(user, user[0].password)
             let comparePassword = compareSync(password, user[0].password)
 
             if(!comparePassword){
                 throw new Error('Incorect password!')
             }
-
             return user;
         } catch (error) {
             throw new Error('Error')
         }
     }
 
-    private async checkIfUserExist(username : string){
-
-        
+    private async checkIfUserExist(username : string){ 
         const userRepository = AppDataSource.getRepository(User)
+
         const users = await userRepository.findBy({
             username : username
         })
