@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { UserService } from "../service/userService";
 import { RoutesController } from "../controllers/routesController";
-import { sign } from 'jsonwebtoken'
+//import { sign } from 'jsonwebtoken'
 import { UserController } from "../controllers/userControllers";
 
 export class UserRoutes extends RoutesController{

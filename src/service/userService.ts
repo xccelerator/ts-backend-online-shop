@@ -1,5 +1,5 @@
 import { User } from "../database/entities/user";
-import { hash, compareSync } from "bcrypt"
+import { hash, compareSync } from 'bcrypt'
 import { AppDataSource } from "../database/dbConnection";
 
 export class UserService {
@@ -28,6 +28,7 @@ export class UserService {
     }
 
     async loginUser(username : string, password : string){
+            console.log('123')
         const user = await this.checkIfUserExist(username)
 
         if(!user.length){

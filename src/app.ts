@@ -6,7 +6,6 @@ import { UserRoutes } from './routes/users';
 import { json } from 'body-parser';
 require('dotenv').config()
 
-
 export class App{
     app : Express;
     server : Server;

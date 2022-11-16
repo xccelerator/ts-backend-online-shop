@@ -21,8 +21,9 @@ export class UserController{
     async login(req: Request, res : Response, next : NextFunction) : Promise<void>{
         const { username , password } = req.body
         try {
+            console.log(username, password)
             const user = await this.userService.loginUser(username, password);
-
+            console.log('123')
             if(!user.length){
                 return next(res.json({message : "Error"}))
             }
