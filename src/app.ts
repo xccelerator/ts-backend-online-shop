@@ -1,6 +1,6 @@
 import express, { Express } from 'express'
 import { Server } from 'http'
-import { BrandController } from './routes/brand';
+import { BrandRoutes } from './routes/brand';
 import { ProductController } from './routes/product';
 import { UserRoutes } from './routes/users';
 import { json } from 'body-parser';
@@ -11,24 +11,24 @@ export class App{
     server : Server;
     port : number;
     userRoutes : UserRoutes;
-    brandController : BrandController;
+    brandRoutes : BrandRoutes;
     productController : ProductController;
 
     constructor(
         userRoutes : UserRoutes,
-        brandController : BrandController,
+        brandRoutes : BrandRoutes,
         productController : ProductController,
     ) {
         this.app = express();
         this.port = Number(process.env.PORT) || 5050;
         this.userRoutes = userRoutes;
-        this.brandController = brandController;
+        this.brandRoutes = brandRoutes;
         this.productController = productController;
     }
 
     useRoutes(){
         this.app.use('/users',this.userRoutes.router )
-        this.app.use('/brand',this.brandController.router)
+        this.app.use('/brand',this.brandRoutes.router)
         this.app.use('/product',this.productController.router)
     }
 
