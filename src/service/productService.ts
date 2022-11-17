@@ -31,6 +31,36 @@ export class ProductService{
         }
     }
 
+    async updateProduct(name : string, newName : string, newPrice : number, newBrand : string){
+        try {
+            const product = await this.checkIfProductExist(name)
+
+            if(!product.length){
+                throw new Error("Incorect product!")
+            }
+
+            const productRepository = AppDataSource.getRepository(Products)
+
+            const brand = await this.getBrand(newBrand)
+
+            if(!brand.length){
+                throw new Error('Incorect brand!')
+            }
+
+            const updProduct = await productRepository.update({
+                name : name
+            }, {
+                name : newName,
+                price : newPrice,
+                brand : brand[0],
+            })
+
+            return updProduct
+        } catch (error) {
+           throw new Error(error.message) 
+        }
+    }
+
     private async checkIfProductExist(name : string){
         const productRepository = AppDataSource.getRepository(Products)
 
@@ -50,4 +80,5 @@ export class ProductService{
 
         return brand
     }
+
 }

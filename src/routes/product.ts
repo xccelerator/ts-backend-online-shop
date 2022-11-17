@@ -62,7 +62,19 @@ export class ProductRoutes extends RoutesController{
     }
 
     async update(req: Request,res : Response, next : NextFunction){
-        res.send('update')
+        const { name , newName, newPrice, newBrand } = req.body
+
+        try {
+            const product = await this.productService.updateProduct(name, newName, newPrice, newBrand)
+
+            if(product.affected){
+                return next(res.json({ message : "Product was updated!" }))
+            }
+
+            return next(res.json({ message : "Error" }))
+        } catch (error) {
+            return next(res.json({ message : error.message}))
+        }
     }
 
 }
