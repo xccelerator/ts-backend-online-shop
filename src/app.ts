@@ -1,7 +1,7 @@
 import express, { Express } from 'express'
 import { Server } from 'http'
 import { BrandRoutes } from './routes/brand';
-import { ProductController } from './routes/product';
+import { ProductRoutes } from './routes/product';
 import { UserRoutes } from './routes/users';
 import { json } from 'body-parser';
 require('dotenv').config()
@@ -12,24 +12,24 @@ export class App{
     port : number;
     userRoutes : UserRoutes;
     brandRoutes : BrandRoutes;
-    productController : ProductController;
+    productRoutes : ProductRoutes;
 
     constructor(
         userRoutes : UserRoutes,
         brandRoutes : BrandRoutes,
-        productController : ProductController,
+        productRoutes : ProductRoutes,
     ) {
         this.app = express();
         this.port = Number(process.env.PORT) || 5050;
         this.userRoutes = userRoutes;
         this.brandRoutes = brandRoutes;
-        this.productController = productController;
+        this.productRoutes = productRoutes;
     }
 
     useRoutes(){
         this.app.use('/users',this.userRoutes.router )
         this.app.use('/brand',this.brandRoutes.router)
-        this.app.use('/product',this.productController.router)
+        this.app.use('/product',this.productRoutes.router)
     }
 
     public async init() {

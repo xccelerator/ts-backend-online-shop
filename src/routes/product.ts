@@ -3,7 +3,7 @@ import { RoutesController } from "../controllers/routesController";
 import { Products } from "../database/entities/product";
 import { ProductService } from "../service/productService";
 
-export class ProductController extends RoutesController{
+export class ProductRoutes extends RoutesController{
     constructor(
         private productService : ProductService
     ){

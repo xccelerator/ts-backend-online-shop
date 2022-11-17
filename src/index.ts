@@ -1,6 +1,6 @@
 import { App } from "./app";
 import { BrandRoutes } from "./routes/brand";
-import { ProductController } from "./routes/product";
+import { ProductRoutes } from "./routes/product";
 import { UserRoutes } from "./routes/users";
 import { UserService } from "./service/userService";
 import 'reflect-metadata'
@@ -12,7 +12,7 @@ import { ProductService } from "./service/productService";
 async function bootstrap() {
     const app = new App(new UserRoutes(new UserController(new UserService)), 
                         new BrandRoutes(new BrandService), 
-                        new ProductController(new ProductService))
+                        new ProductRoutes(new ProductService))
     try {
         AppDataSource.initialize().then(async () => {
             console.log("Database sucessfully connected!")
